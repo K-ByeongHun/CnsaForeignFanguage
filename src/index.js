@@ -1,22 +1,21 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import ReactDOM from "react-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import "assets/css/nucleo-icons.css";
 import "assets/scss/blk-design-system-react.scss";
 import "assets/demo/demo.css";
 
-import Index from "views/Index.js";
-import RegisterPage from "views/examples/RegisterPage.js";
+import Index from "views/Index";
+import RegisterPage from "views/examples/RegisterPage";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
-root.render(
+ReactDOM.render(
   <BrowserRouter>
-    <Routes>
-      <Route path="/components" element={<Index />} />
-      <Route path="/register-page" element={<RegisterPage />} />
-      <Route path="/" element={<Navigate to="/components" />} />
-    </Routes>
-  </BrowserRouter>
+    <Switch>
+      <Route path="/components" component={Index} />
+      <Route path="/register-page" component={RegisterPage} />
+      <Redirect from="/" to="/components" />
+    </Switch>
+  </BrowserRouter>,
+  document.getElementById("root")
 );
